@@ -48,7 +48,6 @@
                 <div class="card-body">
 
                     <form action="salvar_usuario.php" method="post">
-
                         <div class="mb-3">
                             <label for="nome" class="form-label">
                                 Nome Completo
@@ -97,7 +96,7 @@
 
                             <button type="submit" class="btn btn-success">
                                 <i class="bi bi-check-circle"></i>
-                                Salvar Usuário
+                                Criar Usuário
                             </button>
 
                         </div>

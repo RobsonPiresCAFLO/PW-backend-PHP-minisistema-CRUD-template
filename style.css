@@ -1,0 +1,18 @@
+header, nav, main, footer {
+    border: 2px solid;
+    margin: 5px;
+    padding: 20px;
+    border-radius: 10px;
+}
+.container { 
+    max-width: 600px;
+    margin: 0 auto; 
+}
+nav { 
+    text-align: center;
+    word-spacing: 1em;
+}
+footer {
+    text-align: center;
+}
+.card { margin-bottom: 10px;}

@@ -30,7 +30,7 @@
                     <div class="card-body p-4">
                         <h2 class="text-center mb-4">Acesso ao Sistema</h2>
 
-                        <form method="POST" action="principal.php">
+                        <form method="POST" action="auth.php">
                             <div class="mb-3">
                                 <label for="login" class="form-label">Login</label>
                                 <input
@@ -59,12 +59,17 @@
                                 </button>
                             </div>
                         </form>
-
+                        <?php
+                            include "../lib/lib.php";
+                            if (isset($_GET['erro'])) {
+                                mensagem("Erro", $_GET['erro'], 'danger');
+                            }
+                        ?>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </div>a
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

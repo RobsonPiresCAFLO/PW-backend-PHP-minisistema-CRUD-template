@@ -23,4 +23,15 @@
         ";
     }
 
+    function enviar_mensagem($conn, $nome, $email, $texto) {
+        $sql = "INSERT INTO mensagens (nome, email, mensagem) VALUES 
+        ('$nome', '$email', '$texto')";
+        // Executando no Banco...
+        if (mysqli_query($conn, $sql)) {
+            return True;
+        } else {
+            return False;
+        }
+    }
+
 ?>

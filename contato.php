@@ -29,8 +29,16 @@
           </form>
           <?php
             if ($_POST) {
-              mensagem("OK!", "Menssagem enviada com sucesso", "success");
-            }
+              include "lib/conexao.php";
+              foreach ($_POST as $key => $value) {
+                $$key = $value;
+              }
+              if (enviar_mensagem($conn, $nome, $email, $texto)) {
+                mensagem("OK!", "$nome sua mensagem foi enviada com sucesso", "success");
+              } else {
+                mensagem("ERRO!", "Nao foi possível enviar a mensagem", "danger");
+              }
+            } 
           ?>
         </div>        
       </main>

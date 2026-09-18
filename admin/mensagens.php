@@ -1,3 +1,4 @@
+<?php include "validar.php"; ?>
 <!-- mensagens.php -->
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -10,9 +11,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
 </head>
 <body class="bg-light">
-
 <div class="container py-4">
-
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2>
             <i class="fas fa-envelope text-primary"></i>
@@ -27,6 +26,15 @@
 
     <div class="card shadow">
         <div class="card-body">
+            <?php
+                include "../lib/conexao.php";
+                include "../lib/lib.php";
+                $sql = "SELECT * FROM mensagens ORDER BY id_mensagem DESC";
+
+                if ($result = mysqli_query($conn, $sql)) {
+                    $rows = mysqli_num_rows($result);
+                    mensagem($rows," registros encontrados","info");
+            ?>
 
             <table class="table table-hover align-middle">
                 <thead class="table-dark">
@@ -37,51 +45,33 @@
                         <th width="120">Ações</th>
                     </tr>
                 </thead>
-
                 <tbody>
-
-                    <tr>
-                        <td>Maria Silva</td>
-                        <td>maria@email.com</td>
-                        <td>Gostaria de saber mais informações sobre os serviços oferecidos...</td>
-                        <td>
-                            <button class="btn btn-primary btn-sm"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#mensagem1">
-                                <i class="fas fa-cog"></i>
-                            </button>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>João Pereira</td>
-                        <td>joao@email.com</td>
-                        <td>Parabéns pelo site, ficou muito organizado e bonito...</td>
-                        <td>
-                            <button class="btn btn-primary btn-sm"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#mensagem2">
-                                <i class="fas fa-cog"></i>
-                            </button>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>Ana Costa</td>
-                        <td>ana@email.com</td>
-                        <td>Estou com dificuldades para acessar minha conta...</td>
-                        <td>
-                            <button class="btn btn-primary btn-sm"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#mensagem3">
-                                <i class="fas fa-cog"></i>
-                            </button>
-                        </td>
-                    </tr>
-
+                    <?php
+                         while ($linha = mysqli_fetch_assoc($result)) {
+                            $nome = $linha['nome'];
+                            $email = $linha['email'];
+                            $mensagem = $linha['mensagem'];
+                            echo "
+                             <tr>
+                                <td>$nome</td>
+                                <td>$email</td>
+                                <td>$mensagem</td>
+                                <td>
+                                    <button class='btn btn-primary btn-sm'
+                                            data-bs-toggle='modal'
+                                            data-bs-target='#mensagem1'>
+                                        <i class='fas fa-cog'></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            ";
+                    }
+                    ?>
                 </tbody>
             </table>
-
+            <?php // Fechamento do IF
+            }
+            ?>
         </div>
     </div>
 

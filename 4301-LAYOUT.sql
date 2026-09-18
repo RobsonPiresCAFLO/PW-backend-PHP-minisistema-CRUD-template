@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db
--- Tempo de geração: 02/09/2026 às 19:51
+-- Tempo de geração: 18/09/2026 às 16:39
 -- Versão do servidor: 5.7.44
 -- Versão do PHP: 8.3.26
 
@@ -20,6 +20,28 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `4301-LAYOUT`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `mensagens`
+--
+
+CREATE TABLE `mensagens` (
+  `id_mensagem` int(11) NOT NULL,
+  `nome` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `mensagem` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Despejando dados para a tabela `mensagens`
+--
+
+INSERT INTO `mensagens` (`id_mensagem`, `nome`, `email`, `mensagem`, `timestamp`) VALUES
+(4, 'Robson', 'robson.pires.borges@gmail.com', 'Olá! Preciso de ajuda.. quero fazer parcia.', '2026-09-18 14:53:38'),
+(5, 'Robson Pires Borges', 'robsonborges@ifpi.edu.br', 'Olá!', '2026-09-18 14:53:56');
 
 -- --------------------------------------------------------
 
@@ -51,15 +73,28 @@ INSERT INTO `produtos` (`id_produto`, `descricao`, `imagem`, `valor`, `titulo`, 
 
 CREATE TABLE `usuarios` (
   `id_usuario` int(11) NOT NULL,
-  `nome` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `login` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nome` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `login` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `senha` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `data_cricacao` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `criado_em` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Despejando dados para a tabela `usuarios`
+--
+
+INSERT INTO `usuarios` (`id_usuario`, `nome`, `login`, `senha`, `criado_em`) VALUES
+(8, 'admin', 'admin', '$2y$12$pHYwSTGwtMY827uLn1CX7OUUUTIoYjNB1sGStcCe48IK/rxPdly3e', '2026-09-17 10:33:00');
 
 --
 -- Índices para tabelas despejadas
 --
+
+--
+-- Índices de tabela `mensagens`
+--
+ALTER TABLE `mensagens`
+  ADD PRIMARY KEY (`id_mensagem`);
 
 --
 -- Índices de tabela `produtos`
@@ -71,11 +106,18 @@ ALTER TABLE `produtos`
 -- Índices de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
-  ADD PRIMARY KEY (`id_usuario`);
+  ADD PRIMARY KEY (`id_usuario`),
+  ADD UNIQUE KEY `login` (`login`);
 
 --
 -- AUTO_INCREMENT para tabelas despejadas
 --
+
+--
+-- AUTO_INCREMENT de tabela `mensagens`
+--
+ALTER TABLE `mensagens`
+  MODIFY `id_mensagem` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de tabela `produtos`
@@ -87,7 +129,7 @@ ALTER TABLE `produtos`
 -- AUTO_INCREMENT de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
